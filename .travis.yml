@@ -1,0 +1,20 @@
+language: node_js
+node_js: 12
+script:
+  - npm run lint
+  - npm run test
+  - npm run build
+  - npm run docs
+after_success:
+  - npx semantic-release
+  - codecov
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  keep_history: true
+  local_dir: ./docs/api/@edx/frontend-organisms/1.0.0-semantically-released
+  on:
+    branch: master
+env:
+  global:
